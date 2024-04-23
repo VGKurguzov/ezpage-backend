@@ -48,12 +48,12 @@ public class PageService {
         return true;
     }
 
-    public boolean delete(String id, User user) {
-        if (id == null) {
+    public boolean delete(PageDto pageDto, User user) {
+        if (pageDto.id() == null) {
             return false;
         }
 
-        Optional<Page> pageOptional = pageRepository.findByUserAndId(user, id);
+        Optional<Page> pageOptional = pageRepository.findByUserAndId(user, pageDto.id());
         if (pageOptional.isEmpty()) {
             return false;
         }

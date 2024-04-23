@@ -53,12 +53,12 @@ public class ItemService {
         return true;
     }
 
-    public boolean delete(String id, User user) {
-        if (id == null) {
+    public boolean delete(ItemDto itemDto, User user) {
+        if (itemDto.id() == null) {
             return false;
         }
 
-        Optional<Item> itemOptional = itemRepository.findByUserAndId(user, id);
+        Optional<Item> itemOptional = itemRepository.findByUserAndId(user, itemDto.id());
 
         if (itemOptional.isEmpty()) {
             return false;

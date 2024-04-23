@@ -33,8 +33,8 @@ public class ItemController {
     }
 
     @DeleteMapping
-    public ResponseEntity<Void> delete(@RequestBody String id, @RequestAttribute User user) {
-        boolean isDelete = itemService.delete(id, user);
+    public ResponseEntity<Void> delete(@RequestBody ItemDto itemDto, @RequestAttribute User user) {
+        boolean isDelete = itemService.delete(itemDto, user);
         return isDelete ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 }

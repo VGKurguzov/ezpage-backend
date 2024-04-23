@@ -49,8 +49,8 @@ public class PageController {
     }
 
     @DeleteMapping
-    public ResponseEntity<Void> delete(@RequestBody String id, @RequestAttribute User user) {
-        boolean isDelete = pageService.delete(id, user);
+    public ResponseEntity<Void> delete(@RequestBody PageDto pageDto, @RequestAttribute User user) {
+        boolean isDelete = pageService.delete(pageDto, user);
         return isDelete ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 }
