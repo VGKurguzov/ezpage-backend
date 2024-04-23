@@ -1,6 +1,6 @@
 package com.saxakiil.ezpage.interceptor;
 
-import com.saxakiil.TmaValidator;
+import com.saxakiil.ezpage.validator.TmaValidator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

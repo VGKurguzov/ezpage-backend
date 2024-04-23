@@ -1,10 +1,10 @@
 package com.saxakiil.ezpage.interceptor;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.saxakiil.TmaParser;
 import com.saxakiil.ezpage.entity.User;
 import com.saxakiil.ezpage.service.UserService;
-import com.saxakiil.model.InitDataParsed;
+import com.saxakiil.ezpage.validator.TmaParser;
+import com.saxakiil.ezpage.validator.model.InitDataParsed;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
