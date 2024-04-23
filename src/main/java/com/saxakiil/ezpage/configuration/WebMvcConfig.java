@@ -6,6 +6,7 @@ import com.saxakiil.ezpage.interceptor.UserInterceptor;
 import com.saxakiil.ezpage.interceptor.ValidateInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -27,5 +28,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(userInterceptor)
                 .excludePathPatterns(EXCLUDE_PATH_PATTERNS)
                 .order(1);
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/api").allowedOrigins("*");
     }
 }
