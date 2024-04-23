@@ -1,5 +1,6 @@
 package com.saxakiil.ezpage.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -31,6 +32,7 @@ public class Item {
     @Column(name = "title", nullable = false)
     private String title;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pageId")
     private Page page;
