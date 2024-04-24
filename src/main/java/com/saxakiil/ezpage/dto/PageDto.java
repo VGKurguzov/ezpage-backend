@@ -1,9 +1,15 @@
 package com.saxakiil.ezpage.dto;
 
-import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-/**
- * DTO for {@link com.saxakiil.ezpage.entity.Page}
- */
-public record PageDto(String id, String avatar, String username, String theme) implements Serializable {
+@Getter
+@Setter
+@AllArgsConstructor
+public class PageDto {
+    private String id;
+    private String avatar;
+    private String username;
+    private String theme;
 }

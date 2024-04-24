@@ -2,6 +2,7 @@ package com.saxakiil.ezpage.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.saxakiil.ezpage.dto.PageDto;
 import com.saxakiil.ezpage.entity.Page;
@@ -27,8 +28,10 @@ public class PageService {
         return pageRepository.save(page);
     }
 
-    public List<Page> findAll(User user) {
-        return pageRepository.findAllByUser(user);
+    public List<PageDto> findAll(User user) {
+        return pageRepository.findAllByUser(user).stream()
+                .map(pageTransformer::toDto)
+                .collect(Collectors.toList());
     }
 
     public Optional<Page> find(String id) {
@@ -36,10 +39,10 @@ public class PageService {
     }
 
     public boolean update(PageDto pageDto, User user) {
-        if (pageDto.id() == null) {
+        if (pageDto.getId() == null) {
             return false;
         }
-        Optional<Page> pageOptional = pageRepository.findByUserAndId(user, pageDto.id());
+        Optional<Page> pageOptional = pageRepository.findByUserAndId(user, pageDto.getId());
         if (pageOptional.isEmpty()) {
             return false;
         }
@@ -49,11 +52,11 @@ public class PageService {
     }
 
     public boolean delete(PageDto pageDto, User user) {
-        if (pageDto.id() == null) {
+        if (pageDto.getId() == null) {
             return false;
         }
 
-        Optional<Page> pageOptional = pageRepository.findByUserAndId(user, pageDto.id());
+        Optional<Page> pageOptional = pageRepository.findByUserAndId(user, pageDto.getId());
         if (pageOptional.isEmpty()) {
             return false;
         }

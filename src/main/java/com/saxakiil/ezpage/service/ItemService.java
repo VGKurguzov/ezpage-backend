@@ -24,11 +24,11 @@ public class ItemService {
     private final ItemTransformer itemTransformer;
 
     public Item create(ItemDto itemDto, User user) {
-        if (itemDto.pageId() == null) {
+        if (itemDto.getPageId() == null) {
             return null;
         }
 
-        Optional<Page> pageOptional = pageRepository.findByUserAndId(user, itemDto.pageId());
+        Optional<Page> pageOptional = pageRepository.findByUserAndId(user, itemDto.getPageId());
         if (pageOptional.isEmpty()) {
             return null;
         }
@@ -39,11 +39,11 @@ public class ItemService {
     }
 
     public boolean update(ItemDto itemDto, User user) {
-        if (itemDto.id() == null) {
+        if (itemDto.getId() == null) {
             return false;
         }
 
-        Optional<Item> itemOptional = itemRepository.findByUserAndId(user, itemDto.id());
+        Optional<Item> itemOptional = itemRepository.findByUserAndId(user, itemDto.getId());
 
         if (itemOptional.isEmpty()) {
             return false;
@@ -54,11 +54,11 @@ public class ItemService {
     }
 
     public boolean delete(ItemDto itemDto, User user) {
-        if (itemDto.id() == null) {
+        if (itemDto.getId() == null) {
             return false;
         }
 
-        Optional<Item> itemOptional = itemRepository.findByUserAndId(user, itemDto.id());
+        Optional<Item> itemOptional = itemRepository.findByUserAndId(user, itemDto.getId());
 
         if (itemOptional.isEmpty()) {
             return false;

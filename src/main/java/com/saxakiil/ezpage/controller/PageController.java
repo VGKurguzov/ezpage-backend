@@ -1,9 +1,10 @@
 package com.saxakiil.ezpage.controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import com.saxakiil.ezpage.dto.PageDto;
+import com.saxakiil.ezpage.dto.PageResponseDto;
+import com.saxakiil.ezpage.dto.PagesResponseDto;
 import com.saxakiil.ezpage.entity.Page;
 import com.saxakiil.ezpage.entity.User;
 import com.saxakiil.ezpage.service.PageService;
@@ -27,19 +28,21 @@ public class PageController {
     private final PageService pageService;
 
     @PostMapping
-    public ResponseEntity<Page> create(@RequestBody PageDto pageDto, @RequestAttribute User user) {
-        return ResponseEntity.ok(pageService.create(pageDto, user));
+    public ResponseEntity<PageResponseDto> create(@RequestBody PageDto pageDto, @RequestAttribute User user) {
+        Page page = pageService.create(pageDto, user);
+        return ResponseEntity.ok(new PageResponseDto(page));
     }
 
     @GetMapping
-    public ResponseEntity<List<Page>> findAllPagesByUser(@RequestAttribute User user) {
-        return ResponseEntity.ok(pageService.findAll(user));
+    public ResponseEntity<PagesResponseDto> findAllPagesByUser(@RequestAttribute User user) {
+        return ResponseEntity.ok(new PagesResponseDto(pageService.findAll(user)));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Page> findPageByUserAndId(@PathVariable String id) {
+    public ResponseEntity<PageResponseDto> findPageByUserAndId(@PathVariable String id) {
         Optional<Page> optionalPage = pageService.find(id);
-        return optionalPage.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return optionalPage.map(page -> ResponseEntity.ok(new PageResponseDto(page)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PutMapping

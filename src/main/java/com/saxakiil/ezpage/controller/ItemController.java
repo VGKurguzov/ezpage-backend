@@ -1,6 +1,7 @@
 package com.saxakiil.ezpage.controller;
 
 import com.saxakiil.ezpage.dto.ItemDto;
+import com.saxakiil.ezpage.dto.ItemResponseDto;
 import com.saxakiil.ezpage.entity.Item;
 import com.saxakiil.ezpage.entity.User;
 import com.saxakiil.ezpage.service.ItemService;
@@ -22,8 +23,9 @@ public class ItemController {
     private final ItemService itemService;
 
     @PostMapping
-    public ResponseEntity<Item> create(@RequestBody ItemDto itemDto, @RequestAttribute User user) {
-        return ResponseEntity.ok(itemService.create(itemDto, user));
+    public ResponseEntity<ItemResponseDto> create(@RequestBody ItemDto itemDto, @RequestAttribute User user) {
+        Item item = itemService.create(itemDto, user);
+        return item != null ? ResponseEntity.ok(new ItemResponseDto(item)) : ResponseEntity.notFound().build();
     }
 
     @PutMapping
