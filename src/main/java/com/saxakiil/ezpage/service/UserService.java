@@ -23,4 +23,9 @@ public class UserService {
     public Optional<User> findByTgId(@NonNull Long tgId) {
         return userRepository.findByTgId(tgId);
     }
+
+    public boolean delete(User user) {
+        userRepository.delete(user);
+        return true;
+    }
 }
