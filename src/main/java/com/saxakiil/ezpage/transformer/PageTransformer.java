@@ -10,17 +10,22 @@ public class PageTransformer implements Transformer<PageDto, Page> {
     @Override
     public Page toObject(PageDto pageDto) {
         Page page = new Page();
-        page.setAvatar(pageDto.avatar());
-        page.setUsername(pageDto.username());
-        page.setTheme(pageDto.theme());
+        page.setAvatar(pageDto.getAvatar());
+        page.setUsername(pageDto.getUsername());
+        page.setTheme(pageDto.getTheme());
         return page;
     }
 
     @Override
+    public PageDto toDto(Page page) {
+        return new PageDto(page.getId(), page.getAvatar(), page.getUsername(), page.getTheme());
+    }
+
+    @Override
     public Page merge(Page page, PageDto pageDto) {
-        page.setAvatar(pageDto.avatar());
-        page.setUsername(pageDto.username());
-        page.setTheme(pageDto.theme());
+        page.setAvatar(pageDto.getAvatar());
+        page.setUsername(pageDto.getUsername());
+        page.setTheme(pageDto.getTheme());
         return page;
     }
 }

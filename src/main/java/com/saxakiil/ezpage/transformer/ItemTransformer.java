@@ -9,17 +9,22 @@ public class ItemTransformer implements Transformer<ItemDto, Item> {
     @Override
     public Item toObject(ItemDto itemDto) {
         Item item = new Item();
-        item.setIcon(itemDto.icon());
-        item.setUrl(itemDto.url());
-        item.setTitle(itemDto.title());
+        item.setIcon(itemDto.getIcon());
+        item.setUrl(itemDto.getUrl());
+        item.setTitle(itemDto.getTitle());
         return item;
     }
 
     @Override
+    public ItemDto toDto(Item item) {
+        return null;
+    }
+
+    @Override
     public Item merge(Item item, ItemDto itemDto) {
-        item.setIcon(itemDto.icon());
-        item.setUrl(itemDto.url());
-        item.setTitle(itemDto.title());
+        item.setIcon(itemDto.getIcon());
+        item.setUrl(itemDto.getUrl());
+        item.setTitle(itemDto.getTitle());
         return item;
     }
 }
