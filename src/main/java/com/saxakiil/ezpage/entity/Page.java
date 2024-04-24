@@ -4,6 +4,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -41,7 +42,7 @@ public class Page {
     @JoinColumn(name = "userId")
     private User user;
 
-    @OneToMany(mappedBy = "page")
+    @OneToMany(mappedBy = "page", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private Set<Item> items = new LinkedHashSet<>();
 
 }
