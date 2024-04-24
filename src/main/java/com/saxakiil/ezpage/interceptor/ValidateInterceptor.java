@@ -4,6 +4,7 @@ import com.saxakiil.ezpage.validator.TmaValidator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 @Component
 @RequiredArgsConstructor
+@Log4j2
 public class ValidateInterceptor implements HandlerInterceptor {
 
     @Value("${app.ezpage.telegram.secret}")
@@ -21,11 +23,13 @@ public class ValidateInterceptor implements HandlerInterceptor {
         String authorizationHeader = request.getHeader("Authorization");
         if (authorizationHeader == null || authorizationHeader.isEmpty()) {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
+            log.error("Authorization header is empty or null");
             return false;
         }
         String[] authParams = authorizationHeader.split(" ");
         if (authParams.length < 2 || !authParams[0].equals("tma")) {
             response.setStatus(HttpStatus.BAD_REQUEST.value());
+            log.error("Incorrect authorization header: {}", authorizationHeader);
             return false;
         }
         try {
