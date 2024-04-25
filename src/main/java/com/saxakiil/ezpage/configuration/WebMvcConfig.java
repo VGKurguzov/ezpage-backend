@@ -36,6 +36,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .allowedOriginPatterns("*")
                 .allowedMethods("*")
                 .allowedHeaders("*")
+                .exposedHeaders("*")
                 .allowCredentials(true);
     }
 }
