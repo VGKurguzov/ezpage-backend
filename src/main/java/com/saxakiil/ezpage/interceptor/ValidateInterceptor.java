@@ -21,9 +21,10 @@ public class ValidateInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String authorizationHeader = request.getHeader("Tma-Header");
-        if (authorizationHeader == null || authorizationHeader.isEmpty()) {
+        System.out.println(authorizationHeader);
+        if (authorizationHeader == null) {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            log.error("Tma-Header header is empty or null");
+            log.error("Tma-Header header is null");
             return false;
         }
         String[] authParams = authorizationHeader.split(" ");
@@ -32,12 +33,14 @@ public class ValidateInterceptor implements HandlerInterceptor {
             log.error("Incorrect authorization header: {}", authorizationHeader);
             return false;
         }
+        System.out.println(authorizationHeader);
         try {
             TmaValidator.validate(authParams[1], telegramSecret);
         } catch (Exception e) {
             response.setStatus(HttpStatus.BAD_REQUEST.value());
             return false;
         }
+        System.out.println(authorizationHeader);
         return true;
     }
 }
