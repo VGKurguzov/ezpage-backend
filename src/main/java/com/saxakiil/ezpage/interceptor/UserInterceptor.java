@@ -25,6 +25,7 @@ public class UserInterceptor implements HandlerInterceptor {
         Long id = initDataParsed.getUser().getId();
         User user = userService.findByTgId(id).orElseGet(() -> userService.create(id));
         request.setAttribute("user", user);
+        System.out.println(user.toString());
         return true;
 
     }
