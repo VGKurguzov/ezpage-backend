@@ -20,10 +20,10 @@ public class ValidateInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        String authorizationHeader = request.getHeader("Authorization");
+        String authorizationHeader = request.getHeader("Tma-Header");
         if (authorizationHeader == null || authorizationHeader.isEmpty()) {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            log.error("Authorization header is empty or null");
+            log.error("Tma-Header header is empty or null");
             return false;
         }
         String[] authParams = authorizationHeader.split(" ");

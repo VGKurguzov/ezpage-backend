@@ -20,7 +20,7 @@ public class UserInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws JsonProcessingException {
-        InitDataParsed initDataParsed = TmaParser.parse(request.getHeader("Authorization").split(" ")[1]);
+        InitDataParsed initDataParsed = TmaParser.parse(request.getHeader("Tma-Header").split(" ")[1]);
         Long id = initDataParsed.getUser().getId();
         User user = userService.findByTgId(id).orElseGet(() -> userService.create(id));
         request.setAttribute("user", user);
