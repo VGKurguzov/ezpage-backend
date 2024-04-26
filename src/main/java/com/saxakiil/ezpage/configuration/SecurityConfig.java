@@ -16,7 +16,7 @@ public class SecurityConfig {
         return http.cors(Customizer.withDefaults())
                 .csrf(Customizer.withDefaults())
                 .authorizeHttpRequests(authz -> authz.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll())
-                .authorizeHttpRequests(authz -> authz.requestMatchers("/api/*").permitAll())
+                .authorizeHttpRequests(authz -> authz.requestMatchers("/api/**").permitAll())
                 .build();
     }
 }
